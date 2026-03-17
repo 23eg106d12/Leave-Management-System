@@ -1,0 +1,9 @@
+# Ignore target and node_modules folders during Docker copy to keep build lightweight
+target/
+*.jar
+*.war
+.git/
+.idea/
+.vscode/
+node_modules/
+.env
