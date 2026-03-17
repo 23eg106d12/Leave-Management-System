@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+backend/target/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS and Build Files
+.DS_Store
+Thumbs.db
+backend/.mvn/wrapper/maven-wrapper.jar
+frontend/dist/
