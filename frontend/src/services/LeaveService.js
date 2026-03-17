@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/leaves";
+const API_URL = "https://leave-management-system-73fx.onrender.com/api/leaves";
 
 class LeaveService {
   getAllLeaves() {
