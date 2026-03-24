@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://leave-management-system-bk.onrender.com/api/leaves";
+const API_URL = "http://localhost:8080/api/leaves";
 
 export const getLeaves = () => axios.get(API_URL);
 

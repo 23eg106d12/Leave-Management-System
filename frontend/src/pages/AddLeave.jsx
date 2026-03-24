@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createLeave } from "../services/LeaveService";
 
 function AddLeave({ onLeaveAdded }) {
+
   const [leave, setLeave] = useState({
     employeeName: "",
     leaveType: "",
@@ -11,18 +12,25 @@ function AddLeave({ onLeaveAdded }) {
   });
 
   const handleChange = (e) => {
-    setLeave({
-      ...leave,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    setLeave((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const saveLeave = async (e) => {
     e.preventDefault();
 
-    try {
-      await createLeave(leave); // ✅ FIXED usage
+    console.log("Sending data:", leave); // ✅ Debug log
 
+    try {
+      const response = await createLeave(leave); // API call
+
+      console.log("Response:", response); // ✅ Debug log
+
+      // Reset form
       setLeave({
         employeeName: "",
         leaveType: "",
@@ -31,11 +39,24 @@ function AddLeave({ onLeaveAdded }) {
         reason: "",
       });
 
-      if (onLeaveAdded) onLeaveAdded();
+      // Refresh list if parent passed function
+      if (onLeaveAdded) {
+        onLeaveAdded();
+      }
+
+      alert("Leave requested successfully ✅");
 
     } catch (err) {
-      console.error("Error adding leave", err);
-      alert("Failed to request leave.");
+      console.error("Error adding leave:", err);
+
+      // Show better error
+      if (err.response) {
+        alert("Server error: " + err.response.data);
+      } else if (err.request) {
+        alert("No response from server (CORS / backend not running)");
+      } else {
+        alert("Error: " + err.message);
+      }
     }
   };
 
