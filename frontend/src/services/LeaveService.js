@@ -1,13 +1,15 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/leaves";
+const API_URL = import.meta.env.VITE_API_URL;
 
-export const getLeaves = () => axios.get(API_URL);
+export const createLeave = (leave) => {
+  return axios.post(API_URL, leave);
+};
 
-export const createLeave = (leave) => axios.post(API_URL, leave);
+export const getLeaves = () => {
+  return axios.get(API_URL);
+};
 
-export const updateLeave = (id, leave) =>
-  axios.put(`${API_URL}/${id}`, leave);
-
-export const deleteLeave = (id) =>
-  axios.delete(`${API_URL}/${id}`);
+export const deleteLeave = (id) => {
+  return axios.delete(`${API_URL}/${id}`);
+};
