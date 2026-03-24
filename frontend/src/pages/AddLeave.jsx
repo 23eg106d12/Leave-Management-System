@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LeaveService from "../services/LeaveService";
+import { createLeave } from "../services/LeaveService"; // ✅ FIXED import
 
 function AddLeave({ onLeaveAdded }) {
   const [leave, setLeave] = useState({
@@ -17,10 +17,12 @@ function AddLeave({ onLeaveAdded }) {
     });
   };
 
-  const saveLeave = (e) => {
+  const saveLeave = async (e) => {
     e.preventDefault();
 
-    LeaveService.createLeave(leave).then(() => {
+    try {
+      await createLeave(leave); // ✅ FIXED usage
+
       setLeave({
         employeeName: "",
         leaveType: "",
@@ -28,11 +30,13 @@ function AddLeave({ onLeaveAdded }) {
         endDate: "",
         reason: "",
       });
+
       if (onLeaveAdded) onLeaveAdded();
-    }).catch(err => {
-        console.error("Error adding leave", err);
-        alert("Failed to request leave.");
-    });
+
+    } catch (err) {
+      console.error("Error adding leave", err);
+      alert("Failed to request leave.");
+    }
   };
 
   return (
@@ -89,7 +93,7 @@ function AddLeave({ onLeaveAdded }) {
             required
           />
         </div>
-        
+
         <div className="form-group">
           <label>Reason</label>
           <textarea
@@ -103,7 +107,9 @@ function AddLeave({ onLeaveAdded }) {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">Submit Request</button>
+        <button type="submit" className="btn btn-primary">
+          Submit Request
+        </button>
       </form>
     </div>
   );
