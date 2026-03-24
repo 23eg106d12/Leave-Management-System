@@ -1,23 +1,13 @@
 import axios from "axios";
 
-// Using Vite's environment variable system
-const API_URL = import.meta.env.VITE_API_URL || "https://leave-management-system-bk.onrender.com/api/leaves";
-class LeaveService {
-  getAllLeaves() {
-    return axios.get(API_URL);
-  }
+const API_URL = "https://leave-management-system-bk.onrender.com/api/leaves";
 
-  createLeave(leave) {
-    return axios.post(API_URL, leave);
-  }
+export const getLeaves = () => axios.get(API_URL);
 
-  updateLeaveStatus(id, status) {
-    return axios.put(`${API_URL}/${id}?status=${status}`);
-  }
+export const createLeave = (leave) => axios.post(API_URL, leave);
 
-  deleteLeave(id) {
-    return axios.delete(`${API_URL}/${id}`);
-  }
-}
+export const updateLeave = (id, status) =>
+  axios.put(`${API_URL}/${id}?status=${status}`);
 
-export default new LeaveService();
+export const deleteLeave = (id) =>
+  axios.delete(`${API_URL}/${id}`);
