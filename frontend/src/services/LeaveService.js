@@ -1,8 +1,7 @@
 import axios from "axios";
 
 // Using Vite's environment variable system
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/leaves";
-
+const API_URL = import.meta.env.VITE_API_URL || "https://leave-management-system-bk.onrender.com/api/leaves";
 class LeaveService {
   getAllLeaves() {
     return axios.get(API_URL);
