@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LeaveService from "../services/LeaveService";
 
-function AddLeave() {
+function AddLeave({ onLeaveAdded }) {
   const [leave, setLeave] = useState({
     employeeName: "",
     leaveType: "",
@@ -28,7 +28,7 @@ function AddLeave() {
         endDate: "",
         reason: "",
       });
-      window.location.reload(); // Simple reload to show new data in list
+      if (onLeaveAdded) onLeaveAdded();
     }).catch(err => {
         console.error("Error adding leave", err);
         alert("Failed to request leave.");
@@ -45,6 +45,7 @@ function AddLeave() {
           <input
             type="text"
             name="employeeName"
+            className="form-control"
             placeholder="John Doe"
             value={leave.employeeName}
             onChange={handleChange}
@@ -57,6 +58,7 @@ function AddLeave() {
           <input
             type="text"
             name="leaveType"
+            className="form-control"
             placeholder="e.g., Sick, Vacation"
             value={leave.leaveType}
             onChange={handleChange}
@@ -69,6 +71,7 @@ function AddLeave() {
           <input
             type="date"
             name="startDate"
+            className="form-control"
             value={leave.startDate}
             onChange={handleChange}
             required
@@ -80,6 +83,7 @@ function AddLeave() {
           <input
             type="date"
             name="endDate"
+            className="form-control"
             value={leave.endDate}
             onChange={handleChange}
             required
@@ -90,6 +94,7 @@ function AddLeave() {
           <label>Reason</label>
           <textarea
             name="reason"
+            className="form-control"
             placeholder="Brief description of the reason"
             value={leave.reason}
             onChange={handleChange}
@@ -98,7 +103,7 @@ function AddLeave() {
           />
         </div>
 
-        <button type="submit" className="btn-primary">Submit Request</button>
+        <button type="submit" className="btn btn-primary">Submit Request</button>
       </form>
     </div>
   );

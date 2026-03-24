@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LeaveService from "../services/LeaveService";
 
-function LeaveList() {
+function LeaveList({ refreshKey }) {
   const [leaves, setLeaves] = useState([]);
 
   // Fetch all leaves
@@ -17,7 +17,7 @@ function LeaveList() {
 
   useEffect(() => {
     fetchLeaves();
-  }, []);
+  }, [refreshKey]);
 
   // Update status (Approve / Reject)
   const handleStatus = (id, status) => {
