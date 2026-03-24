@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createLeave } from "../services/LeaveService"; // ✅ FIXED import
+import { getLeaves, createLeave, updateLeave, deleteLeave } from "../services/LeaveService";
 
 function AddLeave({ onLeaveAdded }) {
   const [leave, setLeave] = useState({
