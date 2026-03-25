@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/leaves")
 public class LeaveController {
@@ -28,7 +27,8 @@ public class LeaveController {
     }
 
     @PutMapping("/{id}")
-    public LeaveRequest updateStatus(@PathVariable("id") Long id, @RequestParam("status") String status) {
+    public LeaveRequest updateStatus(@PathVariable("id") Long id,
+            @RequestParam("status") String status) {
         return leaveService.updateStatus(id, status);
     }
 

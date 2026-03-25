@@ -51,7 +51,13 @@ function AddLeave({ onLeaveAdded }) {
 
       // Show better error
       if (err.response) {
-        alert("Server error: " + err.response.data);
+        console.log("FULL ERROR:", err.response);
+
+        alert(
+          "Server error: " +
+          (err.response.data?.message ||
+            JSON.stringify(err.response.data))
+        );
       } else if (err.request) {
         alert("No response from server (CORS / backend not running)");
       } else {
@@ -59,6 +65,7 @@ function AddLeave({ onLeaveAdded }) {
       }
     }
   };
+
 
   return (
     <div className="card">
