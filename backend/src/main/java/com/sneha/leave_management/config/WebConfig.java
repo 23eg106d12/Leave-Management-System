@@ -14,12 +14,10 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                                "http://localhost:5173",
-                                "https://leave-management-system-3ctd-23eg106d12s-projects.vercel.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedOrigins("*")
+                        .allowedMethods("*")
                         .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowCredentials(false);
             }
         };
     }
